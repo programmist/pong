@@ -226,26 +226,33 @@ function love.update(dt)
     end
 
     -- AI UPDATE
-    -- Have player 1 & 2 track the balls movement
+    -- Have player 1 & 2 track the ball's movement
 
     -- player 1
-    if (player1.y - ball.y) < 0 then
-        player1.dy = PADDLE_SPEED
-    elseif (player1.y - ball.y) > 0 then
-        player1.dy = -PADDLE_SPEED
+    if ball.dx < 0 then
+        if (player1.y - ball.y) < 0 then
+            player1.dy = PADDLE_SPEED
+        elseif (player1.y - ball.y) > 0 then
+            player1.dy = -PADDLE_SPEED
+        else
+            player1.dy = ball.dy
+        end
     else
-        player1.dy = ball.dy
+          player1.dy = 0
     end
 
     -- player 2
-    if (player2.y - ball.y) < 0 then
-        player2.dy = PADDLE_SPEED
-    elseif (player2.y - ball.y) > 0 then
-        player2.dy = -PADDLE_SPEED
+    if ball.dx > 0 then
+        if (player2.y - ball.y) < 0 then
+            player2.dy = PADDLE_SPEED
+        elseif (player2.y - ball.y) > 0 then
+            player2.dy = -PADDLE_SPEED
+        else
+            player2.dy = ball.dy
+        end
     else
-        player2.dy = ball.dy
+        player2.dy = 0
     end
-
     -- update our ball based on its DX and DY only if we're in play state;
     -- scale the velocity by dt so movement is framerate-independent
     if gameState == 'play' then
