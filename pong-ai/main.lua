@@ -225,25 +225,25 @@ function love.update(dt)
         end
     end
 
-    --
-    -- paddles can move no matter what state we're in
-    --
+    -- AI UPDATE
+    -- Have player 1 & 2 track the balls movement
+
     -- player 1
-    if love.keyboard.isDown('w') then
-        player1.dy = -PADDLE_SPEED
-    elseif love.keyboard.isDown('s') then
+    if (player1.y - ball.y) < 0 then
         player1.dy = PADDLE_SPEED
+    elseif (player1.y - ball.y) > 0 then
+        player1.dy = -PADDLE_SPEED
     else
-        player1.dy = 0
+        player1.dy = ball.dy
     end
 
     -- player 2
-    if love.keyboard.isDown('up') then
-        player2.dy = -PADDLE_SPEED
-    elseif love.keyboard.isDown('down') then
+    if (player2.y - ball.y) < 0 then
         player2.dy = PADDLE_SPEED
+    elseif (player2.y - ball.y) > 0 then
+        player2.dy = -PADDLE_SPEED
     else
-        player2.dy = 0
+        player2.dy = ball.dy
     end
 
     -- update our ball based on its DX and DY only if we're in play state;
