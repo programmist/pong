@@ -10,6 +10,7 @@
     Represents a ball which will bounce back and forth between paddles
     and walls until it passes a left or right boundary of the screen,
     scoring a point for the opponent.
+    Test commit
 ]]
 
 Ball = Class{}
